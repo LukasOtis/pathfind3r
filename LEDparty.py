@@ -12,10 +12,10 @@ for i in ControlPin:
 
 seq = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
 
-for x in range(4)
+for x in range(4):
 	for y in range(4):
 			GPIO.output(ControlPin[y],seq[x][y])
-		time.sleep(1)
+time.sleep(1)
 
 
 GPIO.cleanup()
