@@ -4,7 +4,7 @@ import time
 
 GPIO.setmode(GPIO.BOARD)
 
-ControlPin = [29,31,33,35]
+ControlPin = [31,33,35,37]
 
 for pin in ControlPin:
 	GPIO.setup(pin,GPIO.OUT)
@@ -15,7 +15,7 @@ seq = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
 for x in range(4):
 	for y in range(4):
 			GPIO.output(ControlPin[y],seq[x][y])
-time.sleep(1)
+			time.sleep(0.5)
 
 
 GPIO.cleanup()
