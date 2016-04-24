@@ -6,9 +6,9 @@ GPIO.setmode(GPIO.BOARD)
 
 ControlPin = [29,31,33,35]
 
-for i in ControlPin: 
-	GPIO.setup(i,GPIO.OUT)
-	GPIO.output(i,0)
+for pin in ControlPin:
+	GPIO.setup(pin,GPIO.OUT)
+	GPIO.output(pin,0)
 
 seq = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
 
