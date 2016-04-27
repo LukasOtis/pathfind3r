@@ -8,9 +8,9 @@ GPIO.setmode(GPIO.BOARD)
 ControlPin = [31, 33, 35, 37]
 
 for pin in ControlPin:
-	GPIO.setup(pin, GPIO.OUT)
-	GPIO.output(pin, 0)
-	print('Set up the pins.')
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, 0)
+    print('Set up the pins.')
 
 pinA = 31
 pinB = 33
@@ -20,35 +20,35 @@ pinD = 37
 
 # base rotation functions for stepping motors
 def step_one():
-	GPIO.output(pinA, 1)
-	sleep(time_2)
-	GPIO.output(pinD, 0)
-	GPIO.output(b, 0)
-	sleep(time_1)
+    GPIO.output(pinA, 1)
+    sleep(time_2)
+    GPIO.output(pinD, 0)
+    GPIO.output(pinB, 0)
+    sleep(time_1)
 
 
 def step_two():
-	GPIO.output(pinB, 1)
-	sleep(time_2)
-	GPIO.output(pinA, 0)
-	GPIO.output(pinC, 0)
-	sleep(time_1)
+    GPIO.output(pinB, 1)
+    sleep(time_2)
+    GPIO.output(pinA, 0)
+    GPIO.output(pinC, 0)
+    sleep(time_1)
 
 
 def step_three():
-	GPIO.output(c, 1)
-	sleep(time_2)
-	GPIO.output(pinD, 0)
-	GPIO.output(pinB, 0)
-	sleep(time_1)
+    GPIO.output(pinC, 1)
+    sleep(time_2)
+    GPIO.output(pinD, 0)
+    GPIO.output(pinB, 0)
+    sleep(time_1)
 
 
 def step_four():
-	GPIO.output(pinD, 1)
-	sleep(time_2)
-	GPIO.output(pinA, 0)
-	GPIO.output(pinC, 0)
-	sleep(time_1)
+    GPIO.output(pinD, 1)
+    sleep(time_2)
+    GPIO.output(pinA, 0)
+    GPIO.output(pinC, 0)
+    sleep(time_1)
 
 
 # define coordinate system
@@ -56,13 +56,13 @@ horizontal_max_value = 0
 horizontal_min_value = -horizontal_max_value
 
 # create start state
-x_position = 0									# must in be in bounds of coordinate system
-rotation_position = 0							# must be 0 < rotation_position < 5
+x_position = 0
+rotation_position = 0
 
 
 def move(steps, x_position, rotation_position):
-	if(steps == 0):
-		return 'nothing changed'
+    if(steps == 0):
+        return 'no steps taken'
 
 	boundsFlag = x_position + steps
 	if(boundsFlag > horizontal_max_value | boundsFlag < horizontal_min_value):
