@@ -1,6 +1,5 @@
 # import RPi.GPIO as GPIO
-
-from devStubs.GPIO import *
+from test.devStubs import *
 import time as sleep
 
 time_1 = 0.5
@@ -58,8 +57,8 @@ horizontal_max_value = 0
 horizontal_min_value = -horizontal_max_value
 
 # create start state
-x_position = 0									# must in be in bounds of coordinate system
-rotation_position = 0							# must be 0 < rotation_position < 5
+x_position = 0
+rotation_position = 0
 
 
 def move(steps, x_position, rotation_position):
