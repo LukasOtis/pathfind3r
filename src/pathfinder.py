@@ -61,21 +61,21 @@ x_position = 0
 rotation_position = 0
 
 
-def move(steps, x_position, rotation_position):
+def move(steps):
     if(steps == 0):
-        return 'nothing changed'
+        print('nothing changed')
 
     boundsFlag = x_position + steps
     if(boundsFlag > horizontal_max_value | boundsFlag < horizontal_min_value):
-        return 'error: command out of bounds'
+        print('error: command out of bounds')
     if(steps < 0):
-        rotate_backwards(steps, x_position, rotation_position)
+        rotate_backwards(steps)
     else:
-        rotate_forwards(steps, x_position, rotation_position)
+        rotate_forwards(steps)
 
 
 # move forward a given amount of quarters
-def rotate_forwards(steps, x_position, rotation_position):
+def rotate_forwards(steps):
     for step in steps:
         if (rotation_position == 1):
             step_two
@@ -98,14 +98,29 @@ def rotate_forwards(steps, x_position, rotation_position):
             x_position = x_position + 1
 
 
-# TODO: implement equivalent to rotate_forwards function
-def rotate_backwards(steps, x_position):
-    number = x_position
-    for number in range(steps):
-        step_four()
-        step_three()
-        step_two()
-        step_one()
+# moe backwards a given amount of quaters
+def rotate_backwards(steps):
+    for step in steps:
+        if (rotation_position == 1):
+            step_four
+            rotation_position = 4
+            x_position = x_position - 1
+
+        if (rotation_position == 2):
+            step_one
+            rotation_position = 1
+            x_position = x_position - 1
+
+        if (rotation_position == 3):
+            step_two
+            rotation_position = 2
+            x_position = x_position - 1
+
+        if (rotation_position == 4):
+            step_three
+            rotation_position = 3
+            x_position = x_position - 1
+    
 
 
 def main():
