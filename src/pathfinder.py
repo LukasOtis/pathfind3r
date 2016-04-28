@@ -120,16 +120,11 @@ def rotate_backwards(steps):
             step_three
             rotation_position = 3
             x_position = x_position - 1
-    
 
 
+'''main method'''
 def main():
-    steps = input("How far do you want to walk?: ")
-    if steps >= 1:
-        rotate_forwards(steps, x_position, rotation_position)
-        print('fowards by', steps)
-    elif steps <= -1:
-        rotate_backwards(steps, x_position, rotation_position)
-        print('backwards by' + steps)
-    else:
-        print('Stopped')
+    while(true):
+        steps = int(input("How far do you want to walk?: "))
+        move(steps)
+        print('Done with steps --> New x_position: ' + x_position)
