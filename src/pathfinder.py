@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
-#from test.devStubs import *
+# from test.devStubs import *
 from time import sleep
+from sequenceController import *
 
 time_1 = 0.5
 time_2 = 0.25
@@ -30,7 +31,7 @@ def step_one():
 
 def step_two():
     global time_1
-    global time_2    
+    global time_2
     GPIO.output(pinB, 1)
     sleep(time_2)
     GPIO.output(pinA, 0)
@@ -68,54 +69,49 @@ def move(steps, rotation_position, x_position):
     if(steps == 0):
         print('nothing changed')
 
-    #boundsFlag = x_position + steps
-    #if(boundsFlag > horizontal_max_value | boundsFlag < horizontal_min_value):
+    # boundsFlag = x_position + steps
+    # if(boundsFlag > horizontal_max_value | boundsFlag < horizontal_min_value):
     #    print('error: command out of bounds')
     if(steps < 0):
         rotate_backwards(steps, rotation_position, x_position)
     else:
         return rotate_forwards(steps, rotation_position, x_position)
- 
+
 
 # move forward a given amount of quarters
 def rotate_forwards(steps, rotation_position, x_position):
     print('rotating forwards')
     for step in range(steps):
-        print('i´m at step', step)
+        print('im at step', step)
         if (rotation_position == 1):
             step_two()
-            #rotation_position = rotation_position + 1
             x_position = x_position + 1
 
         if (rotation_position == 2):
             step_three()
-            #rotation_position = rotation_position + 1
             x_position = x_position + 1
 
         if (rotation_position == 3):
             step_four()
-            #rotation_position = rotation_position + 1
             x_position = x_position + 1
 
         if (rotation_position == 4):
             step_one()
-            #rotation_position = rotation_position + 1
             x_position = x_position + 1
-        
-    
+
         rotation_position += 1
-    
+
         if rotation_position == 5:
             rotation_position = 1
- 
-    return(rotation_position)
-        
 
-# moe backwards a given amount of quaters
+    return(rotation_position)
+
+
+# move backwards a given amount of quaters
 def rotate_backwards(steps, rotation_position, x_position):
     print('rotate backwards')
     for step in range(steps):
-        print('i´m at step', step)
+        print('im at step', step)
         if (rotation_position == 1):
             step_four
             rotation_position = 4
@@ -136,8 +132,6 @@ def rotate_backwards(steps, rotation_position, x_position):
             rotation_position = 3
             x_position = x_position - 1
 
-
-'''main method'''
 while(True):
     steps = input("How far do you want to walk?: ")
     steps = int(steps)
