@@ -9,3 +9,5 @@ while(True):
     print('Done with steps --> New x_position: ', x_position)
     print('new rotation position', response)
     rotation_position = response
+
+# setup motor 1
