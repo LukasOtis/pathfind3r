@@ -75,3 +75,40 @@ def test_work_sequence_mixed():
     # returned sequence should be empty now
     assert_equal(controller.sequence.listAll(), [])
     assert_equal(controller.position, -6)
+
+
+def test_out_of_bounds_command():
+    """test that command is rejected if it would be moving out of bounds."""
+    # setup class instances for motor
+    sequence = Sequence()
+    gpiocontroller = GpioMockController(1)
+    motor = Motor('xMotor', [12, 13, 14, 15], 5)
+    controller = SequenceController(sequence, motor, 0, gpiocontroller)
+
+    # put some commmands on queue
+    sequence.enqueue(4)
+    sequence.enqueue(2)
+    # let SequenceController work on queue
+    controller = controller.work_sequence()
+
+    # returned sequence should be empty now
+    assert_equal(controller.sequence.listAll(), [])
+    assert_equal(controller.position, 5)
+
+
+def test_back_to_start():
+    """test back to start function after executing sequence."""
+    # setup class instances for motor
+    sequence = Sequence()
+    gpiocontroller = GpioMockController(1)
+    motor = Motor('xMotor', [12, 13, 14, 15], 272)
+    controller = SequenceController(sequence, motor, 0, gpiocontroller)
+
+    # put some commmands on queue
+    sequence.enqueue(4)
+    sequence.enqueue(-10)
+    # let SequenceController work on queue
+    controller = controller.work_sequence()
+
+    assert_equal(controller.sequence.listAll(), [])
+    assert_equal(controller.position, -6)

@@ -19,11 +19,15 @@ class SequenceController(object):
         while self.sequence.size() != 0:
             poppedCommand = self.sequence.dequeue()
             print("command to do: ", poppedCommand)
-            # TODO: implemt check for out of bounds
+            # TODO: implement check for out of bounds
+            if (self.position + poppedCommand) > self.motor.maxPosition:
+                pass
             # calling the GpioController to handle output to motor
             self.gpiocontroller.move(poppedCommand, self.position)
             # calcutlate the new position
             self.position += poppedCommand
 
-        print("new position of motor", self.motor.motorId, " is:", self.position)
         return self
+
+    def back_to_start(self):
+        pass
