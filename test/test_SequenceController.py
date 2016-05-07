@@ -77,6 +77,7 @@ def test_work_sequence_mixed():
     assert_equal(controller.position, -6)
 
 
+@raises(Exception)
 def test_out_of_bounds_command():
     """test that command is rejected if it would be moving out of bounds."""
     # setup class instances for motor
@@ -91,10 +92,6 @@ def test_out_of_bounds_command():
     # let SequenceController work on queue
     controller = controller.work_sequence()
 
-    # returned sequence should be empty now
-    assert_equal(controller.sequence.listAll(), [])
-    assert_equal(controller.position, 5)
-
 
 def test_back_to_start():
     """test back to start function after executing sequence."""
@@ -106,9 +103,9 @@ def test_back_to_start():
 
     # put some commmands on queue
     sequence.enqueue(4)
-    sequence.enqueue(-10)
     # let SequenceController work on queue
     controller = controller.work_sequence()
 
-    assert_equal(controller.sequence.listAll(), [])
-    assert_equal(controller.position, -6)
+    controller = controller.back_to_start()
+
+    assert_equal(controller.position, 0)
