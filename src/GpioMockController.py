@@ -23,8 +23,8 @@ class GpioMockController():
 
     def move(self, steps, x_position):
         """roatates (1 command) and returns the new rotation_position."""
-        r_initial = (x_position % 4) + 1
-        r_expected = ((x_position + steps) + 1) % 4
+        r_initial = (x_position % 4)
+        r_expected = (x_position + steps) % 4
         print('  the current rotation_position is ', r_initial)
         if(steps == 0):
             print('  moved 0 steps')
@@ -48,22 +48,22 @@ class GpioMockController():
         print('  rotating forwards')
         for step in range(steps):
             print('    loop iteration ', step, '/', range(steps))
-            if (rotation_position == 1):
+            if (rotation_position == 0):
                 self.step_two()
 
-            if (rotation_position == 2):
+            if (rotation_position == 1):
                 self.step_three()
 
-            if (rotation_position == 3):
+            if (rotation_position == 2):
                 self.step_four()
 
-            if (rotation_position == 4):
+            if (rotation_position == 3):
                 self.step_one()
 
             rotation_position += 1
 
-            if rotation_position == 5:
-                rotation_position = 1
+            if rotation_position == 4:
+                rotation_position = 0
 
         return(rotation_position)
 
@@ -72,21 +72,21 @@ class GpioMockController():
         print('    rotate backwards')
         for step in range(steps * (-1)):
             print('    loop iteration', step)
-            if (rotation_position == 1):
+            if (rotation_position == 0):
                 self.step_four
 
-            if (rotation_position == 2):
+            if (rotation_position == 1):
                 self.step_one
 
-            if (rotation_position == 3):
+            if (rotation_position == 2):
                 self.step_two
 
-            if (rotation_position == 4):
+            if (rotation_position == 3):
                 self.step_three
 
             rotation_position -= 1
 
-            if rotation_position == 0:
-                rotation_position = 4
+            if rotation_position == -1:
+                rotation_position = 3
 
         return(rotation_position)

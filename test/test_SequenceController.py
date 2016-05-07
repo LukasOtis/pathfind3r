@@ -24,17 +24,15 @@ def test_work_sequence_forwards():
     controller = SequenceController(sequence, motor, 1, gpiocontroller)
 
     # put some commmands on queue
-    sequence.enqueue(1)
-
+    sequence.enqueue(4)
     # let SequenceController work on queue
     controller = controller.work_sequence()
 
-    print("the sequence given back from work_sequence is: ", sequence)
     print("the position stored in controller: ", controller.position)
 
     # returned sequence should be empty now
     assert_equal(controller.sequence.listAll(), [])
-    assert_equal(controller.position, 2)
+    assert_equal(controller.position, 5)
 
 
 def test_work_sequence_backwards():
@@ -46,7 +44,7 @@ def test_work_sequence_backwards():
     controller = SequenceController(sequence, motor, 1, gpiocontroller)
 
     # put some commmands on queue
-    sequence.enqueue(-2)
+    sequence.enqueue(-10)
 
     # let SequenceController work on queue
     controller = controller.work_sequence()
@@ -55,4 +53,25 @@ def test_work_sequence_backwards():
 
     # returned sequence should be empty now
     assert_equal(controller.sequence.listAll(), [])
-    assert_equal(controller.position, -1)
+    assert_equal(controller.position, -9)
+
+
+def test_work_sequence_mixed():
+    """test dequeue functionality for mixed commands."""
+    # setup class instances for motor
+    sequence = Sequence()
+    gpiocontroller = GpioMockController(1)
+    motor = Motor('xMotor', [12, 13, 14, 15], 272)
+    controller = SequenceController(sequence, motor, 0, gpiocontroller)
+
+    # put some commmands on queue
+    sequence.enqueue(4)
+    sequence.enqueue(-10)
+    # let SequenceController work on queue
+    controller = controller.work_sequence()
+
+    print("the position stored in controller: ", controller.position)
+
+    # returned sequence should be empty now
+    assert_equal(controller.sequence.listAll(), [])
+    assert_equal(controller.position, -6)
