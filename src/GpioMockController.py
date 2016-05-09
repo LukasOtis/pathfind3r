@@ -10,31 +10,25 @@ class GpioMockController():
 
     # base rotation functions for stepping motors
     def step_one(self):
-        print('done with step one')
-
+        sleep(self.sleepTime)
     def step_two(self):
-        print('done with step two')
-
+        sleep(self.sleepTime)
     def step_three(self):
-        print('done with step three')
-
+        sleep(self.sleepTime)
     def step_four(self):
-        print('done with step four')
+        sleep(self.sleepTime)
 
     def move(self, steps, x_position):
         """roatates (1 command) and returns the new rotation_position."""
         r_initial = (x_position % 4)
         r_expected = (x_position + steps) % 4
-        print('  the current rotation_position is ', r_initial)
         if(steps == 0):
-            print('  moved 0 steps')
             return x_position
         if(steps < 0):
             r_return = self.rotate_backwards(steps, r_initial)
             if(r_expected == r_return):
                 return x_position + steps
             else:
-                print('  returned rotation_position ', r_return)
                 raise Exception('internal error with backward rotation')
         else:
             r_return = self.rotate_forwards(steps, r_initial)
@@ -45,9 +39,7 @@ class GpioMockController():
 
     def rotate_forwards(self, steps, rotation_position):
         """move forward a given amount of quarters."""
-        print('  rotating forwards')
         for step in range(steps):
-            print('    loop iteration ', step, '/', range(steps))
             if (rotation_position == 0):
                 self.step_two()
 
@@ -69,9 +61,7 @@ class GpioMockController():
 
     def rotate_backwards(self, steps, rotation_position):
         """move backward a given amount of quarters."""
-        print('    rotate backwards')
         for step in range(steps * (-1)):
-            print('    loop iteration', step)
             if (rotation_position == 0):
                 self.step_four
 

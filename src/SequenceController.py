@@ -18,8 +18,6 @@ class SequenceController(object):
         '''works through all the commmands in the given sequence.'''
         while self.sequence.size() != 0:
             poppedCommand = self.sequence.dequeue()
-            print("command to do: ", poppedCommand)
-            print("motor max position " , self.motor.maxPosition)
             if (self.position + poppedCommand) > self.motor.maxPosition:
                 raise Exception('command oversteps maximal rotation bound')
             if (self.position + poppedCommand) * (-1) > self.motor.maxPosition:
