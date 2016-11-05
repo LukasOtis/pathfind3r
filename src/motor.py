@@ -25,6 +25,7 @@ class Motor():
         self.out(2, 0)
         self.out(3, 0)
         self.out(4, 0)
+        print('im at step 1') 
 
     def step_two(self):
         """Setting gpio pins and sleeping."""
@@ -32,6 +33,7 @@ class Motor():
         self.out(1, 0)
         self.out(2, 0)
         self.out(4, 0)
+        print('im at step 2') 
 
     def step_three(self):
         """Setting gpio pins and sleeping."""
@@ -39,6 +41,7 @@ class Motor():
         self.out(1, 0)
         self.out(3, 0)
         self.out(4, 0)
+        print('im at step 3') 
 
     def step_four(self):
         """Setting gpio pins and sleeping."""
@@ -46,4 +49,5 @@ class Motor():
         self.out(1, 0)
         self.out(2, 0)
         self.out(3, 0)
+        print('im at step 4') 
 

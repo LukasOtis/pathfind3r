@@ -65,27 +65,27 @@ class SequenceController:
     def rotate_backwards(self, steps, rotation_position):
         """Move backward a given amount of quarters."""
         for step in range(steps * (-1)):
+
             if rotation_position == 0:
-                self.motor.step_four
+                self.motor.step_four()
                 time.sleep(0.01)
 
             if rotation_position == 1:
-                self.motor.step_one
+                self.motor.step_one()
                 time.sleep(0.01)
 
             if rotation_position == 2:
-                self.motor.step_two
+                self.motor.step_two()
                 time.sleep(0.01)
 
             if rotation_position == 3:
-                self.motor.step_three
+                self.motor.step_three()
                 time.sleep(0.01)
 
             rotation_position -= 1
 
             if rotation_position == -1:
                 rotation_position = 3
-                time.sleep(0.01)
 
         return rotation_position
 
@@ -93,10 +93,12 @@ class SequenceController:
         """Roatate (1 command) and returns the new rotation_position."""
         r_initial = (x_position % 4)
         r_expected = (x_position + steps) % 4
+
         if steps == 0:
             return x_position
 
         elif steps < 0:
+
             r_return = self.rotate_backwards(steps, r_initial)
 
             if r_expected == r_return:
