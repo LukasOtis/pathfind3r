@@ -1,5 +1,5 @@
 """Controls the Motor GPIO movements."""
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 
 class Motor():
@@ -10,6 +10,11 @@ class Motor():
         self.motor_id = motor_id
         self.pins = pins
         self.max_position = max_position
+        GPIO.setmode(GPIO.BOARD)
+        ControlPin = [31, 33, 35, 37]
+        for pin in ControlPin:
+                GPIO.setup(pin, GPIO.OUT)
+                GPIO.output(pin, 0)
 
     def step_one(self):
         """Setting gpio pins and sleeping."""
@@ -41,4 +46,4 @@ class Motor():
 
     def out(self, pin, set_to):
         """Helper function to set 0 or 1 to gpio pin."""
-        #GPIO.output(self.pins[pin - 1], set_to)
+        GPIO.output(self.pins[pin - 1], set_to)
