@@ -17,7 +17,7 @@ class Motor():
 
     def out(self, pin, set_to):
         """Helper function to set 0 or 1 to gpio pin."""
-        #GPIO.output(self.pins[pin - 1], set_to)
+        GPIO.output(self.pins[pin - 1], set_to)
 
     def step_one(self):
         """Setting gpio pins and sleeping."""
@@ -46,10 +46,4 @@ class Motor():
         self.out(1, 0)
         self.out(2, 0)
         self.out(3, 0)
-<<<<<<< Updated upstream:src/motor.py
 
-    def out(self, pin, set_to):
-        """Helper function to set 0 or 1 to gpio pin."""
-        GPIO.output(self.pins[pin - 1], set_to)
-=======
->>>>>>> Stashed changes:src/Motor.py
