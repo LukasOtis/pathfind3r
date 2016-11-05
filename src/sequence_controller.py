@@ -1,7 +1,6 @@
 """Logic for working through sequences of steps."""
 from sequence import *
-# from GpioController import *
-
+import time
 
 class SequenceController:
     """SequenceController."""
@@ -41,20 +40,25 @@ class SequenceController:
         for step in range(steps):
             if rotation_position == 0:
                 self.motor.step_two()
+                time.sleep(0.01)
 
             if rotation_position == 1:
                 self.motor.step_three()
+                time.sleep(0.01)
 
             if rotation_position == 2:
                 self.motor.step_four()
+                time.sleep(0.01)
 
             if rotation_position == 3:
                 self.motor.step_one()
+                time.sleep(0.01)
 
             rotation_position += 1
 
             if rotation_position == 4:
                 rotation_position = 0
+                time.sleep(0.01)
 
         return rotation_position
 
@@ -63,20 +67,25 @@ class SequenceController:
         for step in range(steps * (-1)):
             if rotation_position == 0:
                 self.motor.step_four
+                time.sleep(0.01)
 
             if rotation_position == 1:
                 self.motor.step_one
+                time.sleep(0.01)
 
             if rotation_position == 2:
                 self.motor.step_two
+                time.sleep(0.01)
 
             if rotation_position == 3:
                 self.motor.step_three
+                time.sleep(0.01)
 
             rotation_position -= 1
 
             if rotation_position == -1:
                 rotation_position = 3
+                time.sleep(0.01)
 
         return rotation_position
 
