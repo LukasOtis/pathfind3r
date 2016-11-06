@@ -1,5 +1,8 @@
 """Controls the Motor GPIO movements."""
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    from fake_gpio import FakeGPIO as GPIO
 
 class Motor():
     """Motor."""
@@ -10,8 +13,7 @@ class Motor():
         self.pins = pins
         self.max_position = max_position
         GPIO.setmode(GPIO.BOARD)
-        ControlPin = [31, 33, 35, 37]
-        for pin in ControlPin:
+        for pin in self.pins:
                 GPIO.setup(pin, GPIO.OUT)
                 GPIO.output(pin, 0)
 
@@ -25,7 +27,7 @@ class Motor():
         self.out(2, 0)
         self.out(3, 0)
         self.out(4, 0)
-        print('im at step 1') 
+        print('im at step 1')
 
     def step_two(self):
         """Setting gpio pins and sleeping."""
@@ -33,7 +35,7 @@ class Motor():
         self.out(1, 0)
         self.out(2, 0)
         self.out(4, 0)
-        print('im at step 2') 
+        print('im at step 2')
 
     def step_three(self):
         """Setting gpio pins and sleeping."""
@@ -41,7 +43,7 @@ class Motor():
         self.out(1, 0)
         self.out(3, 0)
         self.out(4, 0)
-        print('im at step 3') 
+        print('im at step 3')
 
     def step_four(self):
         """Setting gpio pins and sleeping."""
@@ -49,5 +51,5 @@ class Motor():
         self.out(1, 0)
         self.out(2, 0)
         self.out(3, 0)
-        print('im at step 4') 
+        print('im at step 4')
 
