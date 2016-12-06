@@ -1,5 +1,8 @@
 """Controls the Motor GPIO movements."""
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    from fake_gpio import FakeGPIO as GPIO
 
 
 class Motor():
@@ -11,8 +14,7 @@ class Motor():
         self.pins = pins
         self.max_position = max_position
         GPIO.setmode(GPIO.BOARD)
-        ControlPin = [31, 33, 35, 37]
-        for pin in ControlPin:
+        for pin in self.pins:
                 GPIO.setup(pin, GPIO.OUT)
                 GPIO.output(pin, 0)
 
