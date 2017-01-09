@@ -4,6 +4,7 @@ try:
 except ImportError:
     from fake_gpio import FakeGPIO as GPIO
 
+
 class Motor():
     """Motor."""
 
@@ -21,35 +22,58 @@ class Motor():
         """Helper function to set 0 or 1 to gpio pin."""
         GPIO.output(self.pins[pin - 1], set_to)
 
-    def step_one(self):
+    def step_zero(self):
         """Setting gpio pins and sleeping."""
         self.out(1, 1)
         self.out(2, 0)
         self.out(3, 0)
         self.out(4, 0)
-        print('im at step 1')
+
+    def step_one(self):
+        """Setting gpio pins and sleeping."""
+        self.out(1, 1)
+        self.out(3, 1)
+        self.out(2, 0)
+        self.out(4, 0)
 
     def step_two(self):
         """Setting gpio pins and sleeping."""
         self.out(3, 1)
-        self.out(1, 0)
         self.out(2, 0)
+        self.out(1, 0)
         self.out(4, 0)
-        print('im at step 2')
 
     def step_three(self):
         """Setting gpio pins and sleeping."""
+        self.out(3, 1)
         self.out(2, 1)
         self.out(1, 0)
-        self.out(3, 0)
         self.out(4, 0)
-        print('im at step 3')
 
     def step_four(self):
+        """Setting gpio pins and sleeping."""
+        self.out(2, 1)
+        self.out(1, 0)
+        self.out(4, 0)
+        self.out(3, 0)
+
+    def step_five(self):
+        """Setting gpio pins and sleeping."""
+        self.out(2, 1)
+        self.out(4, 1)
+        self.out(1, 0)
+        self.out(3, 0)
+
+    def step_six(self):
         """Setting gpio pins and sleeping."""
         self.out(4, 1)
         self.out(1, 0)
         self.out(2, 0)
         self.out(3, 0)
-        print('im at step 4')
 
+    def step_seven(self):
+        """Setting gpio pins and sleeping."""
+        self.out(4, 1)
+        self.out(1, 1)
+        self.out(2, 0)
+        self.out(3, 0)
