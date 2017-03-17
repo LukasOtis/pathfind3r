@@ -17,4 +17,3 @@ class MotorController:
         time.sleep(self.sleep_time)
 
     def move(self, pattern):
-        
