@@ -4,7 +4,9 @@ from sequence_controller import *
 from motor import *
 from sequence import *
 
-motor = Motor('xMotor', [31, 33, 35, 37], 4000)
+motor_x = Motor('xMotor', 31, 33, 10000)
+motor_y = Motor('yMotor', 35, 37, 10000)
+motor_z = Motor('zMotor', 28, 30, 80000)
 SCONTROLLER = SequenceController(Sequence(), motor, 0)
 SEQUENCE_READY = False
 
