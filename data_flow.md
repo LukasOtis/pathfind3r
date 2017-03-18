@@ -1,5 +1,6 @@
 #dataflow within pathfind3r
 
+```
      GCODE
        |
        |
@@ -21,3 +22,5 @@
     /  |  \
    v   v   v 
      motors
+
+```
