@@ -1,6 +1,4 @@
-"""Represent coordinate system for 2d motor control"""
-
-
+"""Represent coordinate system for 3d motor control"""
 class Grid():
     """Grid with x and y axis."""
 

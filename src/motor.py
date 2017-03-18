@@ -1,4 +1,4 @@
- """Controls the Motor GPIO movements."""
+"""Controls the Motor GPIO movements."""
 try:
     import RPi.GPIO as GPIO
 except ImportError:
