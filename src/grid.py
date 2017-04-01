@@ -24,8 +24,19 @@ class Grid():
         """Relative steps needed to move from current to target position"""
         return [target_x - self.x, target_y - self.y, target_z - self.z]
 
+    def x_movement(self, path):
+        """Checks if there is only x movement"""
+        elif target[0] != 0 & target[1] == 0 :
+            return True
+
+    def y_movement(self, path):
+        """Checks if there is  only y movement"""
+        elif target[0] == 0 & target[1] != 0 :
+            return True
+
     def z_movement(self, path):
-        """Checks if there is z movement and isolates it"""
+        """Checks if there is z movement
+         and isolates it"""
         if target[0] == 0 & target[1] == 0 & target[2] != 0:
             return True
 

@@ -16,4 +16,32 @@ class MotorController:
     def motor_sleep(self):
         time.sleep(self.sleep_time)
 
-    def move(self, pattern):
+    def z_move(self, pattern):
+    """Sould recieve a pattern in Form of [x-mm,y-mm,z-mm] with z !=0"""
+
+    """Multiply moving Parts by steps/mm"""
+
+    """execute z-movements"""
+
+    def x_move(self, pattern):
+    """Should recieve a pattern in Form of [x-mm,y-mm,z-mm] with x !=0 """
+
+    """Multiply moving Parts by steps/mm"""
+
+    """execute only x-movements"""
+
+    def y_move(self, pattern):
+
+    """Should recieve a pattern in Form of [x-mm,y-mm,z-mm] with y !=0 """
+
+    """Multiply moving Parts by steps/mm"""
+
+    """execute only y-movements"""
+
+    def x_y_move(self, pattern):
+
+    """Should recieve a pattern in Form of [x-mm,y-mm,z-mm] with x & y !=0 """
+
+    """Multiply moving Parts by steps/mm"""
+
+    """execute x-y movements"""

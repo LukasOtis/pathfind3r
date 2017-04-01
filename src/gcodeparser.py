@@ -1,50 +1,42 @@
+import csv
+
 class GCodeParser:
     def __init__(self, xcoord, ycoord, zcoord):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.zcoord = zcoord
 
+        csv.register_dialect('excel', delimiter=',')
+        file = open('test.csv')
+        reader = csv.reader(file)
+        data = list(reader)
+
     @staticmethod
     def fromLine(line):
-        if len(line) == 0:
+        if data(line) == '':
             return None
 
-        if line[0] == 'G':
+        else
+            row = data[line]
+            value = (row[0])
             xcoord = float(0)
             ycoord = float(0)
             zcoord = float(0)
 
             # Extract X coordinate
-            if 'X' in line:
-                temp = line[line.index('X'):]
-                temp = temp[1:GCodeParser.getDelimiter(temp)]
-                xcoord = float(temp)
+            index_one = value.index(';')
+            x_value = value[0:index_one]
+            xcoord = float(x_value)
 
             # Extract Y coordinate
-            if 'Y' in line:
-                temp = line[line.index('Y'):]
-                temp = temp[1:GCodeParser.getDelimiter(temp)]
-                ycoord = float(temp)
+            temp = value[index_one+1:len(value)]
+            index_two = temp.index(';')
+            y_value = temp[0:index_two]
+            ycoord = float(y_value)
 
             # Extract Z coordinate
-            if 'Z' in line:
-                temp = line[line.index('Z'):]
-                temp = temp[1:GCodeParser.getDelimiter(temp)]
+            z_value = temp[index_two+1:len(temp)]
+            zcoord = float(z_value)
+            
+        return GCodeParser(xcoord, ycoord, zcoord)
 
-                zcoord = float(temp)
-            return GCodeParser(xcoord, ycoord, zcoord)
-        elif line[0] == 'M':
-            return GCodeParser(0, 0, 0)
-        else:
-            return None
-
-    @staticmethod
-    def getDelimiter(string):
-        if ' ' in string:
-            index = string.index(' ')
-        else:
-            return len(string)
-
-        offset = len(string) - index
-        offset = offset * -1
-        return offset
