@@ -1,15 +1,12 @@
 import csv
 
 class GCodeParser:
-    def __init__(self, xcoord, ycoord, zcoord):
-        self.xcoord = xcoord
-        self.ycoord = ycoord
-        self.zcoord = zcoord
-
-        csv.register_dialect('excel', delimiter=',')
-        file = open('test.csv')
+    def __init__(filename):
+        file = open('filename')
         reader = csv.reader(file)
         data = list(reader)
+        length=len(data)
+        return GCodeParser(length)
 
     @staticmethod
     def fromLine(line):
@@ -38,5 +35,6 @@ class GCodeParser:
             z_value = temp[index_two+1:len(temp)]
             zcoord = float(z_value)
             
-        return GCodeParser(xcoord, ycoord, zcoord)
+            coords=list(xcoord, ycoord, zcoord)
+        return GCodeParser(coords)
 
