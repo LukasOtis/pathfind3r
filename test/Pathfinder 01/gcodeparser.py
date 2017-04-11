@@ -32,5 +32,3 @@ class GCodeParser:
         coordinates.append(zcoord)
         return (coordinates)
         
-
-
