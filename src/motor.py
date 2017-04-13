@@ -14,7 +14,7 @@ sleep_time = Variables.sleep_time
 class Motor():
 
     def setup():
-        '''# configure RPI-GPIO
+        # configure RPI-GPIO
         GPIO.setmode(GPIO.BOARD)
         # set X Axis Pins
         GPIO.setup(x_pin_direction, GPIO.OUT)
@@ -30,34 +30,52 @@ class Motor():
         GPIO.setup(z_pin_direction, GPIO.OUT)
         GPIO.output(z_pin_direction, 0)
         GPIO.setup(z_pin_steps, GPIO.OUT)
-        GPIO.output(z_pin_steps, 0)'''
+        GPIO.output(z_pin_steps, 0)
 
     def move(next_row):
         #z_movements
         z_steps = next_row[2]
         if z_steps > 0:
+            GPIO.output(z_pin_direction, 0)
             for steps in range(z_steps):
-                print('z_step forward')
+                GPIO.output(z_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(z_pin_steps, 0)
         if z_steps < 0:
             z_steps = z_steps * (-1)
+            GPIO.output(z_pin_direction, 1)
             for steps in range(z_steps):
-                print('z_move backwards')
+                GPIO.output(z_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(z_pin_steps, 0)
         #x_movements
         x_steps = next_row[0]
         if x_steps > 0:
+            GPIO.output(x_pin_direction, 0)
             for steps in range(x_steps):
-                print('x_step forward')
+                GPIO.output(x_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(x_pin_steps, 0)
         if x_steps < 0:
             x_steps = x_steps * (-1)
+            GPIO.output(x_pin_direction, 1)
             for steps in range(x_steps):
-                print('x_move backwards')
+                GPIO.output(x_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(x_pin_steps, 0)
         #y_movements
         y_steps = next_row[1]
         if y_steps > 0:
+            GPIO.output(y_pin_direction, 0)
             for steps in range(y_steps):
-                print('y_step forward')
+                GPIO.output(y_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(y_pin_steps, 0)
         if y_steps < 0:
             y_steps = y_steps * (-1)
+            GPIO.output(y_pin_direction, 1)
             for steps in range(y_steps):
-                print('y_move backwards')
+                GPIO.output(y_pin_steps, 1)
+                time.sleep(sleep_time)
+                GPIO.output(y_pin_steps, 0)
         

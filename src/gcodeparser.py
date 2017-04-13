@@ -2,14 +2,18 @@ import csv
 class GCodeParser:
     @staticmethod
     def OpenFile(filename):
+        # after retrieving the filename, the function opens this file ans returns the data as a list
         file = open(filename)
+        # to open the file the csv-libary wich has been inported at the beginning of the file is needed
         reader = csv.reader(file)
         data = list(reader)
-        length = len(data)
+        # each list etry consists of the x,y,z cooridantes of one position
         return data
 
     @staticmethod
     def FromLine(data, line):
+        # formates the line discribed in the input so each indivitual coordinate can be stored and used
+        # input is a list-entry with the format: (x_coordinate; y_cooridnate; z_coordinate)
         row = data[line]
         value = (row[0])
         coordinates = []
