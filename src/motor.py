@@ -1,5 +1,9 @@
 """Controls the Motor GPIO movements."""
-'''import RPi.GPIO as GPIO'''
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    from fake_gpio import FakeGPIO as GPIO
+
 from variables import Variables
 
 x_motor_direction = Variables.x_motor_direction
