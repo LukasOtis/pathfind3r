@@ -3,7 +3,7 @@ from motor import Motor
 
 #opens the file named in the varibles file
 length = range(FileOperator.OpenFile()- 3)
-Motor.setup
+Motor.setup()
 start = 2
 for row in length:
 	# for the appropiated length each row is worked through 
