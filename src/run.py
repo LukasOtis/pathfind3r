@@ -1,4 +1,4 @@
-from operator import FileOperator
+from file_operator import FileOperator
 from motor import Motor
 
 #opens the file named in the varibles file

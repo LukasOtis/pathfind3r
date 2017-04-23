@@ -1,13 +1,12 @@
 import csv
+
 class GCodeParser:
     @staticmethod
     def OpenFile(filename):
-        # after retrieving the filename, the function opens this file ans returns the data as a list
-        file = open(filename)
-        # to open the file the csv-libary wich has been inported at the beginning of the file is needed
-        reader = csv.reader(file)
-        data = list(reader)
-        # each list etry consists of the x,y,z cooridantes of one position
+        with open(filename, 'r') as file:
+            reader = csv.reader(file)
+            data = list(reader)
+
         return data
 
     @staticmethod
@@ -35,6 +34,3 @@ class GCodeParser:
         coordinates.append(ycoord)
         coordinates.append(zcoord)
         return (coordinates)
-        
-
-
