@@ -3,6 +3,7 @@ from motor import Motor
 
 #opens the file named in the varibles file
 length = range(FileOperator.OpenFile()- 3)
+Motor.setup
 start = 2
 for row in length:
 	# for the appropiated length each row is worked through 
@@ -11,3 +12,4 @@ for row in length:
 	delta_step = FileOperator.NextMove(next_row)
 	corrected_coords = FileOperator.MoveCorrect(delta_step)
 	Motor.move(corrected_coords)
+	print('finished')
