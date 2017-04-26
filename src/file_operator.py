@@ -7,6 +7,7 @@ z_step_p_millimeter = Variables.z_step_p_millimeter
 filename = Variables.filename
 
 class FileOperator():
+    @staticmethod
     def OpenFile():
         # opens the csv file which is set in the variables and returns the lentgh
         data = GCodeParser.OpenFile(filename)
@@ -40,6 +41,7 @@ class FileOperator():
         delta_step = (initial_x - next_x, initial_y - next_y, initial_z - next_z)
         return(delta_step)
 
+    @staticmethod
     def MoveCorrect(next_move):
         # Translates the requiered movement from mm to steps the stepper will have to complete
         # factores are set in the variables file
