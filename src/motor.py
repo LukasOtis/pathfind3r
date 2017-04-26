@@ -14,6 +14,8 @@ y_motor_step = Variables.y_motor_step
 z_motor_direction = Variables.z_motor_direction
 z_motor_step = Variables.z_motor_step
 
+enable_motor_control = Variables.enable_motor_control
+
 sleep_time = Variables.sleep_time
 
 class Motor():
@@ -21,6 +23,9 @@ class Motor():
     def setup():
         # configure RPI-GPIO
         GPIO.setmode(GPIO.BOARD)
+        # set motor_controll pin
+        GPIO.setup(enable_motor_control, GPIO.OUT)
+        GPIO.output(enable_motor_control, 0)
         # set X Axis Pins
         GPIO.setup(x_motor_direction, GPIO.OUT)
         GPIO.output(x_motor_direction, 0)
