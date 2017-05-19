@@ -2,6 +2,7 @@
 import configparser
 import logging
 from logging.handlers import TimedRotatingFileHandler
+import subprocess
 
 
 def create_timed_rotating_log(path):
@@ -32,6 +33,8 @@ def main():
     # To get the values as integers:
     i = int(config['grid']['max_position_z'])
     print(i+2)
+
+    # subprocess.call("../gcodepull.sh", shell=True)
 
 if __name__ == "__main__":
     main()
