@@ -1,9 +1,13 @@
+import subprocess
 from file_operator import FileOperator
 from motor import Motor
 try:
     import RPi.GPIO as GPIO
 except ImportError:
     from fake_gpio import FakeGPIO as GPIO
+
+# get latest gcodefiles
+# subprocess.call("../gcodepull.sh", shell=True)
 
 #opens the file named in the varibles file
 length = range(FileOperator.OpenFile()- 3)
