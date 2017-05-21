@@ -11,9 +11,6 @@ try:
 except ImportError:
     from fake_gpio import FakeGPIO as GPIO
 
-
-
-
 def create_timed_rotating_log(path):
     logger = logging.getLogger("BasicLogger")
 
@@ -24,9 +21,6 @@ def create_timed_rotating_log(path):
             interval=1,
             backupCount=5)
     logger.addHandler(handler)
-
-
-    logger.info("wow created a logger")
 
 def main():
     log_file = "main_log.log"
