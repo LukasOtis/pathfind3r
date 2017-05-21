@@ -1,5 +1,5 @@
 class Variables:
-        filename = 'test.csv'
+        filename = 'src/test.csv'
 
         x_step_p_millimeter = 50
         y_step_p_millimeter = 50
