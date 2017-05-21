@@ -4,19 +4,22 @@ try:
 except ImportError:
     from fake_gpio import FakeGPIO as GPIO
 
-from variables import Variables
 import time
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-x_motor_direction = Variables.x_motor_direction
-x_motor_step = Variables.x_motor_step
-y_motor_direction = Variables.y_motor_direction
-y_motor_step = Variables.y_motor_step
-z_motor_direction = Variables.z_motor_direction
-z_motor_step = Variables.z_motor_step
+# set config values
+# TODO: create __init__ function for motor and move config read to main method
+x_motor_direction = int(config['motor_x']['direction_pin'])
+x_motor_step = int(config['motor_x']['step_pin'])
+y_motor_direction = int(config['motor_y']['direction_pin'])
+y_motor_step = int(config['motor_y']['step_pin'])
+z_motor_direction = int(config['motor_z']['direction_pin'])
+z_motor_step = int(config['motor_z']['step_pin'])
+enable_motor_control = int(config['motor_enable']['pin'])
+sleep_time = float(config['motor_enable']['sleep'])
 
-enable_motor_control = Variables.enable_motor_control
-
-sleep_time = Variables.sleep_time
 
 class Motor():
 
@@ -88,4 +91,3 @@ class Motor():
                 GPIO.output(y_motor_step, 1)
                 time.sleep(sleep_time)
                 GPIO.output(y_motor_step, 0)
-        
