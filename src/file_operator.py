@@ -1,15 +1,60 @@
 from gcodeparser import GCodeParser
 from variables import Variables
+import csv
 
 x_step_p_millimeter = Variables.x_step_p_millimeter
 y_step_p_millimeter = Variables.y_step_p_millimeter
 z_step_p_millimeter = Variables.z_step_p_millimeter
 filename = Variables.filename
 
+
 class FileOperator():
+
+    def __init__(self, motor, x_millimeter, y_millimeter, z_millimeter):
+        """Initialize."""
+        self.motor = motor
+        self.x_millimeter = x_millimeter
+        self.y_millimeter = y_millimeter
+        self.z_millimeter = z_millimeter
+
+    def printfile(self, filepath):
+        with open(filepath, 'r') as fp:
+            reader = csv.reader(fp, delimiter=';')
+            data = [row for row in reader]
+
+        lastrow = data[0]
+        for row in data:
+            delta_step = self.relative_steps(lastrow, row)
+            corrected_coords = self.corrected_coords(delta_step)
+            self.motor.move(corrected_coords)
+            lastrow = row
+
+    def relative_steps(self, lastrow, row):
+        """Calculates steps needed to get from lastrow to current row"""
+        if len(row) != 3:
+            row = lastrow
+        last_x = float(lastrow[0])
+        x = float(row[0])
+        last_y = float(lastrow[1])
+        y = float(row[1])
+        last_z = float(lastrow[2])
+        z = float(row[2])
+        # subtracting the value of each coordinate to get the required movement
+        delta_step = [last_x - x, last_y - y, last_z - z]
+        return delta_step
+
+    def corrected_coords(self, delta_step):
+        """Takes array[x,y,z] of millimeters and returns steps for motor"""
+        # Needs to be rounded to int for whole steps
+        x_move = int(delta_step[0] * x_step_p_millimeter)
+        y_move = int(delta_step[1] * y_step_p_millimeter)
+        z_move = int(delta_step[2] * z_step_p_millimeter)
+        print('move')
+        print([x_move, y_move, z_move])
+        return([x_move, y_move, z_move])
+
     @staticmethod
-    def OpenFile():
-        # opens the csv file which is set in the variables and returns the lentgh
+    def OpenFile(filename):
         data = GCodeParser.OpenFile(filename)
         # the data of the file is stored as a list on a Variable
         FileOperator.data = data

@@ -5,89 +5,90 @@ except ImportError:
     from fake_gpio import FakeGPIO as GPIO
 
 import time
-import configparser
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-# set config values
-# TODO: create __init__ function for motor and move config read to main method
-x_motor_direction = int(config['motor_x']['direction_pin'])
-x_motor_step = int(config['motor_x']['step_pin'])
-y_motor_direction = int(config['motor_y']['direction_pin'])
-y_motor_step = int(config['motor_y']['step_pin'])
-z_motor_direction = int(config['motor_z']['direction_pin'])
-z_motor_step = int(config['motor_z']['step_pin'])
-enable_motor_control = int(config['motor_enable']['pin'])
-sleep_time = float(config['motor_enable']['sleep'])
 
 
 class Motor():
+    """Motor."""
 
-    def setup():
+    def __init__(self, xdir, xstep, ydir, ystep, zdir, zstep, enable, sleep):
+        """Initialize."""
+        self.xdir = xdir
+        self.xstep = xstep
+        self.ydir = ydir
+        self.ystep = ystep
+        self.zdir = zdir
+        self.zstep = zstep
+        self.enable = enable
+        self.sleep = sleep
+
+    def cleanup(self):
+        GPIO.cleanup()
+
+    def setup(self):
         # configure RPI-GPIO
         GPIO.setmode(GPIO.BOARD)
         # set motor_controll pin
-        GPIO.setup(enable_motor_control, GPIO.OUT)
-        GPIO.output(enable_motor_control, 0)
+        GPIO.setup(self.enable, GPIO.OUT)
+        GPIO.output(self.enable, 0)
         # set X Axis Pins
-        GPIO.setup(x_motor_direction, GPIO.OUT)
-        GPIO.output(x_motor_direction, 0)
-        GPIO.setup(x_motor_step, GPIO.OUT)
-        GPIO.output(x_motor_step, 0)
+        GPIO.setup(self.xdir, GPIO.OUT)
+        GPIO.output(self.xdir, 0)
+        GPIO.setup(self.xstep, GPIO.OUT)
+        GPIO.output(self.xstep, 0)
         # set y Axis Pins
-        GPIO.setup(y_motor_direction, GPIO.OUT)
-        GPIO.output(y_motor_direction, 0)
-        GPIO.setup(y_motor_step, GPIO.OUT)
-        GPIO.output(y_motor_step, 0)
+        GPIO.setup(self.ydir, GPIO.OUT)
+        GPIO.output(self.ydir, 0)
+        GPIO.setup(self.ystep, GPIO.OUT)
+        GPIO.output(self.ystep, 0)
         # set z Axis Pins
-        GPIO.setup(z_motor_direction, GPIO.OUT)
-        GPIO.output(z_motor_direction, 0)
-        GPIO.setup(z_motor_step, GPIO.OUT)
-        GPIO.output(z_motor_step, 0)
+        GPIO.setup(self.zdir, GPIO.OUT)
+        GPIO.output(self.zdir, 0)
+        GPIO.setup(self.zstep, GPIO.OUT)
+        GPIO.output(self.zstep, 0)
 
-    def move(next_row):
-        #z_movements
+    def move(self, next_row):
+        # z_movements
         z_steps = next_row[2]
         if z_steps > 0:
-            GPIO.output(z_motor_direction, 0)
+            GPIO.output(self.zdir, 0)
             for steps in range(z_steps):
-                GPIO.output(z_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(z_motor_step, 0)
+                GPIO.output(self.zstep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.zstep, 0)
         if z_steps < 0:
             z_steps = z_steps * (-1)
-            GPIO.output(z_motor_direction, 1)
+            GPIO.output(self.zdir, 1)
             for steps in range(z_steps):
-                GPIO.output(z_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(z_motor_step, 0)
-        #x_movements
+                GPIO.output(self.zstep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.zstep, 0)
+        # x_movements
         x_steps = next_row[0]
         if x_steps > 0:
-            GPIO.output(x_motor_direction, 0)
+            GPIO.output(self.xdir, 0)
             for steps in range(x_steps):
-                GPIO.output(x_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(x_motor_step, 0)
+                GPIO.output(self.xstep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.xstep, 0)
         if x_steps < 0:
             x_steps = x_steps * (-1)
-            GPIO.output(x_motor_direction, 1)
+            GPIO.output(self.xdir, 1)
             for steps in range(x_steps):
-                GPIO.output(x_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(x_motor_step, 0)
-        #y_movements
+                GPIO.output(self.xstep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.xstep, 0)
+        # y_movements
         y_steps = next_row[1]
         if y_steps > 0:
-            GPIO.output(y_motor_direction, 0)
+            GPIO.output(self.ydir, 0)
             for steps in range(y_steps):
-                GPIO.output(y_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(y_motor_step, 0)
+                GPIO.output(self.ystep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.ystep, 0)
         if y_steps < 0:
             y_steps = y_steps * (-1)
-            GPIO.output(y_motor_direction, 1)
+            GPIO.output(self.ydir, 1)
             for steps in range(y_steps):
-                GPIO.output(y_motor_step, 1)
-                time.sleep(sleep_time)
-                GPIO.output(y_motor_step, 0)
+                GPIO.output(self.ystep, 1)
+                time.sleep(self.sleep)
+                GPIO.output(self.ystep, 0)

@@ -9,7 +9,7 @@ class Variables:
         x_motor_step = 31
         y_motor_direction = 37
         y_motor_step = 35
-        z_motor_direction = 38 
+        z_motor_direction = 38
         z_motor_step = 36
         enable_motor_control = 32
 
