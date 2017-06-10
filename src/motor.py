@@ -45,6 +45,7 @@ class Motor():
         GPIO.output(self.zdir, 0)
         GPIO.setup(self.zstep, GPIO.OUT)
         GPIO.output(self.zstep, 0)
+        import code; code.interact(local=dict(globals(), **locals()))
 
     def move(self, next_row):
         # z_movements
