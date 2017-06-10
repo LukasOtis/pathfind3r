@@ -20,6 +20,7 @@ class Motor():
         self.zstep = zstep
         self.enable = enable
         self.sleep = sleep
+        self.setup
 
     def cleanup(self):
         GPIO.cleanup()
@@ -45,7 +46,6 @@ class Motor():
         GPIO.output(self.zdir, 0)
         GPIO.setup(self.zstep, GPIO.OUT)
         GPIO.output(self.zstep, 0)
-        import code; code.interact(local=dict(globals(), **locals()))
 
     def move(self, next_row):
         # z_movements
