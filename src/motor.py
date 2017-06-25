@@ -8,10 +8,10 @@ import time
 
 
 class Motor():
-    """Motor."""
+    """Defines configuration and functionality to control all motors with"""
 
     def __init__(self, xdir, xstep, ydir, ystep, zdir, zstep, enable, sleep):
-        """Initialize."""
+        """Stepping motors take a directional pin as well as a stepping pin"""
         self.xdir = xdir
         self.xstep = xstep
         self.ydir = ydir
