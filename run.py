@@ -53,7 +53,7 @@ if inputok != 'y':
 
 motor = Motor(xdir, xstep, ydir, ystep, zdir, zstep, enable_pin, sleep_time)
 motor.setup
-import code; code.interact(local=dict(globals(), **locals()))
+#import code; code.interact(local=dict(globals(), **locals()))
 operator = FileOperator(motor, x_mil, y_mil, z_mil)
 
 print('')
