@@ -52,7 +52,8 @@ if inputok != 'y':
     sys.exit('( ! )     Okay. Stopping ...')
 
 motor = Motor(xdir, xstep, ydir, ystep, zdir, zstep, enable_pin, sleep_time)
-motor.setup
+Motor.setup(motor)
+#import code; code.interact(local=dict(globals(), **locals()))
 operator = FileOperator(motor, x_mil, y_mil, z_mil)
 
 print('')
@@ -74,4 +75,4 @@ operator.printfile(filepath)
 
 print('')
 print('( 5 )  Done. Cleaning up')
-motor.cleanup
+Motor.cleanup(motor)

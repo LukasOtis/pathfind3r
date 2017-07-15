@@ -20,6 +20,7 @@ class Motor():
         self.zstep = zstep
         self.enable = enable
         self.sleep = sleep
+        self.setup
 
     def cleanup(self):
         GPIO.cleanup()
@@ -27,6 +28,7 @@ class Motor():
     def setup(self):
         # configure RPI-GPIO
         GPIO.setmode(GPIO.BOARD)
+        print('setting up GPIO BOARD')
         # set motor_controll pin
         GPIO.setup(self.enable, GPIO.OUT)
         GPIO.output(self.enable, 0)
@@ -45,6 +47,7 @@ class Motor():
         GPIO.output(self.zdir, 0)
         GPIO.setup(self.zstep, GPIO.OUT)
         GPIO.output(self.zstep, 0)
+        print('done setting up pins')
 
     def move(self, next_row):
         # z_movements
