@@ -1,3 +1,0 @@
-[submodule "gcodefiles"]
-	path = gcodefiles
-	url = git@github.com:nikonoll/gcodefiles.git
