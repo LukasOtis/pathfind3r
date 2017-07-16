@@ -50,6 +50,7 @@ print('        z_mil: ' + str(z_mil))
 inputok = input('-      Looks good? Keep going? (y/n)  ')
 if inputok != 'y':
     sys.exit('( ! )     Okay. Stopping ...')
+    Motor.cleanup(motor)
 
 motor = Motor(xdir, xstep, ydir, ystep, zdir, zstep, enable_pin, sleep_time)
 Motor.setup(motor)

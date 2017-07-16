@@ -39,9 +39,11 @@ class FileOperator():
     def corrected_coords(self, delta_step):
         """Takes array[x,y,z] of millimeters and returns steps for motor"""
         # Needs to be rounded to int for whole steps
-        x_move = int(delta_step[0] * x_millimeter)
-        y_move = int(delta_step[1] * y_millimeter)
-        z_move = int(delta_step[2] * z_millimeter)
+        print('coorinates')
+        print(delta_step)
+        x_move = int(delta_step[0] * self.x_millimeter)
+        y_move = int(delta_step[1] * self.y_millimeter)
+        z_move = int(delta_step[2] * self.z_millimeter)
         print('move')
         print([x_move, y_move, z_move])
         return([x_move, y_move, z_move])
