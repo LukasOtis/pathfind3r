@@ -54,7 +54,7 @@ if inputok != 'y':
 motor = Motor(xdir, xstep, ydir, ystep, zdir, zstep, enable_pin, sleep_time)
 Motor.setup(motor)
 #import code; code.interact(local=dict(globals(), **locals()))
-operator = FileOperator(motor, x_mil, y_mil, z_mil)
+FileOperator = FileOperator(motor, x_mil, y_mil, z_mil)
 
 print('')
 print('( 3 )  Choosing GCODE File')

@@ -1,21 +1,14 @@
 from gcodeparser import GCodeParser
-from variables import Variables
 import csv
-
-x_step_p_millimeter = Variables.x_step_p_millimeter
-y_step_p_millimeter = Variables.y_step_p_millimeter
-z_step_p_millimeter = Variables.z_step_p_millimeter
-filename = Variables.filename
-
 
 class FileOperator():
 
-    def __init__(self, motor, x_millimeter, y_millimeter, z_millimeter):
+    def __init__(self, motor, x_mil, y_mil, z_mil):
         """Initialize."""
         self.motor = motor
-        self.x_millimeter = x_millimeter
-        self.y_millimeter = y_millimeter
-        self.z_millimeter = z_millimeter
+        self.x_millimeter = x_mil
+        self.y_millimeter = y_mil
+        self.z_millimeter = z_mil
 
     def printfile(self, filepath):
         with open(filepath, 'r') as fp:
@@ -46,9 +39,9 @@ class FileOperator():
     def corrected_coords(self, delta_step):
         """Takes array[x,y,z] of millimeters and returns steps for motor"""
         # Needs to be rounded to int for whole steps
-        x_move = int(delta_step[0] * x_step_p_millimeter)
-        y_move = int(delta_step[1] * y_step_p_millimeter)
-        z_move = int(delta_step[2] * z_step_p_millimeter)
+        x_move = int(delta_step[0] * x_millimeter)
+        y_move = int(delta_step[1] * y_millimeter)
+        z_move = int(delta_step[2] * z_millimeter)
         print('move')
         print([x_move, y_move, z_move])
         return([x_move, y_move, z_move])
